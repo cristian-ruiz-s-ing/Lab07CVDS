@@ -21,10 +21,18 @@ package edu.eci.cvds.samples.services.client;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.SQLException;
+import java.util.Date;
+
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+
+import edu.eci.cvds.sampleprj.dao.mybatis.mappers.ClienteMapper;
+import edu.eci.cvds.sampleprj.dao.mybatis.mappers.ItemMapper;
+import edu.eci.cvds.sampleprj.dao.mybatis.mappers.TipoItemMapper;
+import edu.eci.cvds.samples.entities.Item;
+import edu.eci.cvds.samples.entities.TipoItem;
 
 /**
  *
@@ -62,21 +70,64 @@ public class MyBatisExample {
 
         SqlSession sqlss = sessionfact.openSession();
 
+        //Crear el mapper y usarlo:
         
-        //Crear el mapper y usarlo: 
-        //ClienteMapper cm=sqlss.getMapper(ClienteMapper.class)
-        //cm...
+                   
+        System.out.println("+++++++++++++++++++++++");
+        System.out.println("+++++++++++++++++++++++");
+        System.out.println("1. Consultas CLIENTE:");
+        System.out.println("-----------------------");
+        System.out.println("-----------------------");
+        System.out.println("1.1 Consulta de todos los CLIENTEs:");
+        ClienteMapper cm=sqlss.getMapper(ClienteMapper.class);
+       // System.out.println(cm.consultarClientes()); 
+        System.out.println("-----------------------");
+        System.out.println("-----------------------");
+        System.out.println("1.2 Consulta de CLIENTES ESPECIFICOS:");
+        System.out.println(cm.consultarCliente(2154421));
+        System.out.println("-----------------------");
+        System.out.println("-----------------------");
+        System.out.println(cm.consultarCliente(2154422));
         
+        //System.out.println("1.1 INSERT ItemRentadoACliente:");
+        //Date fechai = new Date(120, 11, 24);
+        //Date fechaf = new Date(120, 11, 25);
+        //cm.agregarItemRentadoACliente(2154421,93 , fechai,fechaf);
+        //cm.agregarItemRentadoACliente(2154422,92 , fechai,fechaf);
+
+
+                 
+        System.out.println("+++++++++++++++++++++++");
+        System.out.println("+++++++++++++++++++++++");
+        System.out.println("Consultas ITEM:");
+        System.out.println("-----------------------");
+        System.out.println("-----------------------");
+        System.out.println("1.1 Consulta de todos los ITEMS:");
+        ItemMapper im = sqlss.getMapper(ItemMapper.class);
+       // System.out.println(im.consultarItems());
+        System.out.println("-----------------------");
+        System.out.println("-----------------------");
+        System.out.println("1.2 Consulta de ITEMS ESPECIFICOS:");
+        System.out.println("-----------------------");
+        System.out.println("-----------------------");
+        System.out.println(im.consultarItem(92));
+        System.out.println("-----------------------");
+        System.out.println("-----------------------");
+        System.out.println(im.consultarItem(93));
+    
+        //Date fechal = new Date(120, 11, 24);
+        //TipoItem tipo1 = new TipoItem(90, "Aventura");
+        //Item it = new Item(tipo1, 92 , "Indiana Jones" , "Pelicula", fechal, 120, "dvd", "Aventura");
+        //im.insertarItem(it);
+        //TipoItem tipo2 = new TipoItem(91, "Belico");
+        //Date fecha2 = new Date(120, 11, 25);
+        //Item it1 = new Item(tipo2, 93  , "The pacific" , "serie", fecha2, 140, "dvd", "Belico");
+        //im.insertarItem(it1);
+        //System.out.println(im.consultarItem(92));
+        //System.out.println(im.consultarItem(93));
         
-        
-        sqlss.commit();
-        
+        sqlss.commit();      
         
         sqlss.close();
-
-        
-        
     }
-
-
 }
